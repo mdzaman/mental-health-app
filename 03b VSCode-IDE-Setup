@@ -1,0 +1,304 @@
+# Visual Studio Code Setup Guide
+## For Mental Health Application Development
+
+### 1. Basic VSCode Installation
+
+#### 1.1 Download and Install
+1. Go to https://code.visualstudio.com/
+2. Download version for your OS (Windows/Mac)
+3. Run the installer
+   - **Windows**: Follow installation wizard
+   - **Mac**: Drag to Applications folder
+
+#### 1.2 Initial Configuration
+1. Launch VSCode
+2. Set color theme:
+   - Press `Ctrl+K Ctrl+T` (Windows) or `Cmd+K Cmd+T` (Mac)
+   - Recommended: "Dark+" for reduced eye strain
+3. Enable Auto Save:
+   - File > Auto Save
+   - Or set `"files.autoSave": "afterDelay"` in settings
+
+### 2. Essential Extensions Installation
+
+#### 2.1 Python Development
+1. Python (Microsoft)
+   - Features: IntelliSense, Linting, Debugging
+   - Install Command: `ext install ms-python.python`
+   - Settings to add:
+   ```json
+   {
+     "python.linting.enabled": true,
+     "python.linting.pylintEnabled": true,
+     "python.formatting.provider": "black",
+     "python.testing.pytestEnabled": true
+   }
+   ```
+
+2. Python Test Explorer
+   - For running tests visually
+   - Install Command: `ext install littlefoxteam.vscode-python-test-adapter`
+
+#### 2.2 JavaScript/React Development
+1. ES7+ React/Redux/React-Native snippets
+   - Features: React code snippets
+   - Install Command: `ext install dsznajder.es7-react-js-snippets`
+
+2. ESLint
+   - For JavaScript linting
+   - Install Command: `ext install dbaeumer.vscode-eslint`
+   - Settings to add:
+   ```json
+   {
+     "eslint.validate": [
+       "javascript",
+       "javascriptreact",
+       "typescript",
+       "typescriptreact"
+     ]
+   }
+   ```
+
+3. Prettier
+   - Code formatter
+   - Install Command: `ext install esbenp.prettier-vscode`
+   - Settings to add:
+   ```json
+   {
+     "editor.defaultFormatter": "esbenp.prettier-vscode",
+     "editor.formatOnSave": true
+   }
+   ```
+
+#### 2.3 Flutter/Dart Development
+1. Flutter
+   - Official Flutter extension
+   - Install Command: `ext install Dart-Code.flutter`
+
+2. Dart
+   - Dart language support
+   - Install Command: `ext install Dart-Code.dart-code`
+
+#### 2.4 AWS Development
+1. AWS Toolkit
+   - Features: AWS service integration
+   - Install Command: `ext install AmazonWebServices.aws-toolkit-vscode`
+
+2. CloudFormation
+   - For infrastructure as code
+   - Install Command: `ext install aws-scripting-guy.cform`
+
+#### 2.5 Database Tools
+1. SQLite
+   - For local database development
+   - Install Command: `ext install qwtel.sqlite-viewer`
+
+2. MongoDB
+   - For NoSQL database development
+   - Install Command: `ext install mongodb.mongodb-vscode`
+
+#### 2.6 General Development Tools
+1. GitLens
+   - Enhanced Git integration
+   - Install Command: `ext install eamodio.gitlens`
+
+2. Docker
+   - Container management
+   - Install Command: `ext install ms-azuretools.vscode-docker`
+
+3. Thunder Client
+   - API testing tool (alternative to Postman)
+   - Install Command: `ext install rangav.vscode-thunder-client`
+
+### 3. Workspace Configuration
+
+#### 3.1 Create Workspace Settings
+1. Create `.vscode` folder in project root
+2. Create `settings.json` inside `.vscode`:
+```json
+{
+  "editor.rulers": [80, 100],
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [88]
+  },
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+  },
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  }
+}
+```
+
+#### 3.2 Create Launch Configurations
+1. Create `launch.json` in `.vscode`:
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: FastAPI",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["main:app", "--reload"],
+      "cwd": "${workspaceFolder}/backend"
+    },
+    {
+      "name": "React: Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend"
+    },
+    {
+      "name": "Flutter",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart"
+    }
+  ]
+}
+```
+
+### 4. Project Structure Setup
+
+Create the following folder structure:
+```
+mental-health-app/
+├── .vscode/
+│   ├── settings.json
+│   └── launch.json
+├── backend/
+│   ├── app/
+│   ├── tests/
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+├── mobile/
+│   ├── lib/
+│   └── pubspec.yaml
+├── infrastructure/
+│   └── cloudformation/
+└── README.md
+```
+
+### 5. Keyboard Shortcuts
+
+Essential shortcuts to remember:
+- `Ctrl+Shift+P` (Windows) / `Cmd+Shift+P` (Mac): Command Palette
+- `Ctrl+P` (Windows) / `Cmd+P` (Mac): Quick File Open
+- `Ctrl+`` (Windows) / `Cmd+`` (Mac): Toggle Terminal
+- `Ctrl+Shift+E` (Windows) / `Cmd+Shift+E` (Mac): Explorer
+- `Ctrl+Shift+G` (Windows) / `Cmd+Shift+G` (Mac): Source Control
+- `F5`: Start Debugging
+- `Ctrl+Space`: Trigger Suggestions
+
+### 6. Git Integration Setup
+
+1. Configure Git in VSCode:
+   - Open Command Palette
+   - Type "Git: Clone"
+   - Enter repository URL
+
+2. Set up `.gitignore`:
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# Node
+node_modules/
+build/
+.env.local
+
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# AWS
+.aws-sam/
+```
+
+### 7. Recommended Workflow
+
+1. Open project folder in VSCode
+2. Use integrated terminal for commands
+3. Use Source Control panel for Git operations
+4. Use Debug panel for running applications
+5. Use Thunder Client for API testing
+6. Use Terminal for package management
+
+### 8. Troubleshooting
+
+Common issues and solutions:
+
+1. **Python Interpreter Not Found**
+   - Command Palette > Python: Select Interpreter
+   - Choose from virtual environment
+
+2. **ESLint Not Working**
+   - Ensure node_modules is installed
+   - Run `npm install` in frontend directory
+
+3. **Flutter Doctor Issues**
+   - Run `flutter doctor` in terminal
+   - Follow suggested fixes
+
+4. **Git Integration Problems**
+   - Check Git installation: `git --version`
+   - Configure Git user: 
+     ```bash
+     git config --global user.name "Your Name"
+     git config --global user.email "your.email@example.com"
+     ```
+
+### 9. Best Practices
+
+1. **Code Organization**
+   - Use consistent file naming
+   - Implement folder structure
+   - Keep related files together
+
+2. **Version Control**
+   - Commit frequently
+   - Write meaningful commit messages
+   - Use branches for features
+
+3. **Testing**
+   - Write tests alongside code
+   - Run tests before commits
+   - Use integrated test explorer
+
+4. **Documentation**
+   - Document code using comments
+   - Maintain README files
+   - Use TypeScript/Python type hints
