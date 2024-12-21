@@ -246,7 +246,146 @@ flowchart TD
 - Disaster recovery plan
 - Regular backup strategy
 
-### 9. Scalability Requirements
+### 9. Compliance Service Requirements
+
+#### 9.1 Compliance Microservice Architecture
+- **Service Name**: Global Compliance Service
+- **Purpose**: Handle all regulatory compliance requirements across different regions
+- **Technology Stack**: 
+  - Python/FastAPI for service implementation
+  - AWS Lambda for serverless execution
+  - DynamoDB for compliance rules storage
+  - EventBridge for compliance events
+  - AWS Config for resource compliance
+
+#### 9.2 Core Functionalities
+1. **Regional Compliance Management**
+   - Dynamic rule engine for different jurisdictions
+   - Region-specific data handling rules
+   - Compliance validation workflows
+   - APIs:
+     - `/compliance/rules/{region}` - Regional rules
+     - `/compliance/validate` - Validation endpoints
+     - `/compliance/reports` - Compliance reporting
+
+2. **Healthcare Regulations**
+   - HIPAA (United States)
+   - PHIPA (Canada)
+   - NHS Data Security (UK)
+   - My Health Records Act (Australia)
+   - APIs:
+     - `/compliance/healthcare/{region}`
+     - `/compliance/healthcare/audit`
+
+3. **Data Protection Regulations**
+   - GDPR (European Union)
+   - CCPA (California, USA)
+   - PIPEDA (Canada)
+   - LGPD (Brazil)
+   - PDPA (Singapore)
+   - APIs:
+     - `/compliance/data-protection/{region}`
+     - `/compliance/consent-management`
+     - `/compliance/data-rights`
+
+4. **Digital Health Regulations**
+   - FDA Digital Health Regulations (USA)
+   - EU MDR (European Union)
+   - TGA Regulations (Australia)
+   - PMDA Requirements (Japan)
+   - APIs:
+     - `/compliance/digital-health/{region}`
+     - `/compliance/certifications`
+
+#### 9.3 Compliance Features
+1. **Data Residency Management**
+   - Region-specific data storage
+   - Data transfer controls
+   - Cross-border data flow management
+   - APIs:
+     - `/compliance/data-residency/rules`
+     - `/compliance/data-residency/transfer`
+
+2. **Consent Management**
+   - Region-specific consent templates
+   - Consent tracking and versioning
+   - Withdrawal management
+   - APIs:
+     - `/compliance/consent/templates/{region}`
+     - `/compliance/consent/track`
+     - `/compliance/consent/withdraw`
+
+3. **Audit Trail System**
+   - Comprehensive logging
+   - Access tracking
+   - Change management
+   - APIs:
+     - `/compliance/audit/logs`
+     - `/compliance/audit/reports`
+
+4. **Privacy Controls**
+   - Data minimization
+   - Purpose limitation
+   - Storage limitation
+   - APIs:
+     - `/compliance/privacy/controls`
+     - `/compliance/privacy/settings`
+
+#### 9.4 Implementation Requirements
+1. **Dynamic Rule Engine**
+   ```python
+   class ComplianceRule:
+       region: str
+       regulation_type: str
+       requirements: List[Requirement]
+       validation_rules: List[ValidationRule]
+       enforcement_level: str
+   ```
+
+2. **Data Flow Controls**
+   ```python
+   class DataTransferControl:
+       source_region: str
+       destination_region: str
+       data_type: str
+       transfer_rules: List[TransferRule]
+       required_encryptions: List[EncryptionType]
+   ```
+
+#### 9.5 Integration Points
+1. **User Service Integration**
+   - User region detection
+   - Applicable regulation mapping
+   - Consent enforcement
+
+2. **Data Service Integration**
+   - Data residency enforcement
+   - Transfer controls
+   - Encryption requirements
+
+3. **Analytics Service Integration**
+   - Compliance reporting
+   - Audit trail generation
+   - Risk assessment
+
+#### 9.6 Monitoring and Reporting
+1. **Compliance Monitoring**
+   - Real-time compliance tracking
+   - Violation detection
+   - Automated notifications
+   - APIs:
+     - `/compliance/monitor/status`
+     - `/compliance/monitor/violations`
+
+2. **Reporting System**
+   - Automated compliance reports
+   - Regulatory submissions
+   - Incident reporting
+   - APIs:
+     - `/compliance/reports/generate`
+     - `/compliance/reports/submit`
+
+10. Scalability Requirements
 
 #### 9.1 Load Handling
 - Support for 5M active users
